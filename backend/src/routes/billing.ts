@@ -97,6 +97,14 @@ router.post(
   }
 );
 
+// GET handler for webhook validation (Stripe checks if endpoint exists)
+router.get("/webhook", (req: Request, res: Response) => {
+  res.json({
+    message: "Stripe webhook endpoint is active",
+    methods: ["POST"],
+  });
+});
+
 router.post("/webhook", async (req, res) => {
   // Get the signature from headers
   const signature = req.headers["stripe-signature"];
