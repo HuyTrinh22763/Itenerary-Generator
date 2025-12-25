@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { itineraryAPI } from "@/lib/apiClients";
@@ -9,7 +9,7 @@ import PaceSelector from "@/components/generate/PaceSelector";
 import InterestsSelector from "@/components/generate/InterestsSelector";
 import GenerateButton from "@/components/generate/GenerateButton";
 
-export default function GeneratePage() {
+function GeneratePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -88,5 +88,13 @@ export default function GeneratePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function GeneratePage() {
+  return (
+    <Suspense fallback={<div>Loading....</div>}>
+      <GeneratePageContent />
+    </Suspense>
   );
 }
