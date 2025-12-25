@@ -2,7 +2,8 @@
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { itineraryAPI } from "@/lib/apiClients";
-function itineraryPage() {
+import ProtectedRoute from "@/components/ProtectedRoute";
+function ItineraryPageContent() {
   const params = useParams();
   const itineraryId = params.id as string;
 
@@ -83,4 +84,11 @@ function itineraryPage() {
   );
 }
 
-export default itineraryPage;
+export default function itineraryPage() {
+  return (
+    // React components must start with uppercase
+    <ProtectedRoute>
+      <ItineraryPageContent />
+    </ProtectedRoute>
+  );
+}

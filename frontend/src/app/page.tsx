@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-export default function Home() {
+import ProtectedRoute from "@/components/ProtectedRoute";
+function HomePage() {
   const router = useRouter();
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -113,5 +113,15 @@ export default function Home() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    // If logged in -> shows <HomePage />
+    // If not logged in -> redirects to /login
+    <ProtectedRoute>
+      <HomePage />
+    </ProtectedRoute>
   );
 }

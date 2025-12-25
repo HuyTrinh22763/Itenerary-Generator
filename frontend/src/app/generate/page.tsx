@@ -8,6 +8,7 @@ import BudgetSelector from "@/components/generate/BudgetSelector";
 import PaceSelector from "@/components/generate/PaceSelector";
 import InterestsSelector from "@/components/generate/InterestsSelector";
 import GenerateButton from "@/components/generate/GenerateButton";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 function GeneratePageContent() {
   const router = useRouter();
@@ -93,8 +94,10 @@ function GeneratePageContent() {
 
 export default function GeneratePage() {
   return (
-    <Suspense fallback={<div>Loading....</div>}>
-      <GeneratePageContent />
-    </Suspense>
+    <ProtectedRoute>
+      <Suspense fallback={<div>Loading....</div>}>
+        <GeneratePageContent />
+      </Suspense>
+    </ProtectedRoute>
   );
 }
